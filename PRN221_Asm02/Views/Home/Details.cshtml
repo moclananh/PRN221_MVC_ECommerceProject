@@ -1,0 +1,67 @@
+﻿@model PRN221_Asm02.Models.Product
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+
+<body>
+    <div class="app">
+        <div class="layout">
+            <div class="page-container">
+                <!-- Content Wrapper START -->
+                <div class="main-content">
+
+                    <div class="card" style="margin-bottom: 20px">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-5 text-center">
+                                        <img alt="" class="img-fluid w-100" src="@Model.ProductImage" style="max-width: 54%">
+                                        <p style="padding-top: 12px; font-size: 20px; font-weight: bold">Price: @Model.UnitPrice $</p>
+                                        <p style="font-size: 20px; font-weight: bold">Stock: @Model.QuantityPerUnit</p>
+                                    </div>
+                                    <div class="col-7 text-center">
+                                        <div class="m-t-5">
+                                            <h1 style="color: tomato">@Model.ProductName</h1>
+                                        </div>
+                                       
+                                        <div class="text-right">
+                                            @if (Model.QuantityPerUnit > 0)
+                                            {
+                                                <div class="text-right">
+                                                    <button class="btn btn-success" type="button">
+                                                        <a class="btn btn-success btn-block"
+                                                       asp-controller="ShoppingCart"
+                                                       asp-action="AddToCart"
+                                                       asp-route-id="@Model.ProductId">Add to cart</a>
+                                                    </button>
+                                                </div>
+
+                                            }
+                                            @if (Model.QuantityPerUnit <= 0)
+                                            {
+                                                <div class="text-center">
+
+                                                    <p class="card-text show_txt" style="color:red; font-size: 20px">Sold out </p>
+                                                </div>
+                                            }
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="assets/js/vendors.min.js"></script>
+
+        <!-- page js -->
+        <!-- Core JS -->
+        <script src="assets/js/app.min.js"></script>
+</body>
+</html>

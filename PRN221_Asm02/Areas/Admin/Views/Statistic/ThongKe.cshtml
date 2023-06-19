@@ -1,0 +1,85 @@
+﻿@model IEnumerable<PRN221_Asm02.Models.Order>
+@{
+    ViewData["Title"] = "ThongKe";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using Microsoft.AspNetCore.Http;
+
+
+
+<h1 class="text-center" style="padding-bottom: 12px; color:brown">A report statistics sales</h1>
+<div class="row" style="width: 90%; margin: 0 auto">
+
+
+    <div class="table-responsive col-9" style="width:80%; margin: 0 auto; margin-bottom: 24px">
+        <table class="table e-commerce-table table-hover">
+            <thead>
+                <tr style="border-width: 2px; text-align: center">
+                    <th>
+                        Order ID
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Account ID
+                    </th>
+                    <th>
+                        Total Bill
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    dynamic sum = 0;
+                    foreach (var item in Model)
+                    {
+                       
+                        if (DateTime.Parse(@Context.Session.GetString("StartDate")) <= item.OrderDate && DateTime.Parse(@Context.Session.GetString("EndDate")) >= item.OrderDate)
+                        {
+                            
+                            <tr class="text-center">
+                                <td style="border-width: 2px">
+                                    @Html.DisplayFor(modelItem => item.OrderId)
+                                </td>
+                                <td style="border-width: 2px">
+                                    @Html.DisplayFor(modelItem => item.OrderDate)
+                                </td>
+                                <td style="border-width: 2px">
+                                    @Html.DisplayFor(modelItem => item.CustomerId)
+                                </td>
+                                <td style="border-width: 2px">
+                                    @Html.DisplayFor(modelItem => item.Freight)
+                                </td>
+
+                                <td style="border-width: 2px; width: 120px;">
+                                    <i class="fa fa-id-card" aria-hidden="true"></i>
+                                    @Html.ActionLink("Details", "Details", new { id = item.OrderId })
+                                </td>
+                            </tr>
+                            if (item.Freight != null){
+                                sum += item.Freight;
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                    double x = (double)sum;
+                }
+            </tbody>
+        </table>
+        @if (sum == 0)
+        {
+            <h2 class="text-center text-danger">Not Found</h2>
+        }
+    </div>
+
+    <div class="col-3">
+        <h4 style="color: green"> -> Total InCome: @x</h4>
+    </div>
+
+</div>
+

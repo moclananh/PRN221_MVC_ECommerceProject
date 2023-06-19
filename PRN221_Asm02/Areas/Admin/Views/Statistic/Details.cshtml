@@ -1,0 +1,34 @@
+﻿@model PRN221_Asm02.Models.OrderDetail
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    List<OrderDetail> details = ViewBag.ChiTiet;
+}
+
+<table class="table" id="table">
+    <thead>
+        <tr>
+            <th>ID Product</th>
+            <th>Price</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (details != null && details.Count() > 0)
+        {
+            foreach (var item in details)
+            {
+                <tr>
+                    <td>@item.ProductId</td>
+                    <td>@item.UnitPrice</td>
+                    <td>@item.Quantity</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<div>
+   
+</div>
+

@@ -1,0 +1,61 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<PRN221_Asm02.Models.Product>
+@{
+    ViewData["Title"] = "PIZZA GOOD - " + ViewBag.CurrentPage;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int PageCurrent = ViewBag.CurrentPage;
+    int PageNext = PageCurrent + 1;
+
+}
+
+<!--PRODUCT -->
+<section class="gallery_section layout_padding">
+    <div class="heading_container justify-content-center">
+        <h2>
+            Our Gallery
+        </h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    string url = $"/{item.ProductName}-{item.ProductId}.html";
+
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card">
+                            <img class="card-img-top csspro" src="@item.ProductImage">
+                            <div class="card-body">
+                                <h4 class="card-title show_txt"><a href="@url" title="View Product">@item.ProductName</a></h4>
+                            
+                                @if (item.QuantityPerUnit <= 0)
+                                {
+                                    <strong style="color: red; font-size: large; font-family: cursive;  ">420$</strong>
+                                    <p class="card-text show_txt" style="color:red">Sold out </p>
+                                }
+                                @if (item.QuantityPerUnit > 0)
+                                {
+                                    <div class="">
+                                        <div class="col">  <p id="amount1" class="card-text show_txt">In stock : @item.QuantityPerUnit</p>
+                                            </div>                                    
+                                        <div class="col">
+                                            <strong style="color: red; font-size: large; font-family: cursive;  ">Price: @item.UnitPrice$</strong>
+                                        </div>
+                                        <div class="col">
+                                            <a class="btn btn-success btn-block"
+                                              @* asp-controller="ShoppingCart"
+                                               asp-action="AddToCart"
+                                               asp-route-id="@item.ProductId"*@>Add to cart</a>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+<!-- end PRODUCT -->

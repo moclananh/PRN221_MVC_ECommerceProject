@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<PRN221_Asm02.Models.Order>
+
+@{
+    Layout = null;
+}
+
+<div class="container" style="margin-bottom: 24px">
+    <div class="table-responsive">
+        <h1 class="text-center">Customer Bills</h1>
+        <table class="table" id="table">
+            <thead>
+                <tr class="text-center">
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Freight)
+                    </th>
+                    <th>
+                        ID Account
+                    </th>
+                    <th></th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (@item.CustomerId == @Context.Session.GetInt32("id"))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Freight)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerId)
+                            </td>
+                            <td>
+                                <i class="fa fa-id-card" aria-hidden="true"></i>
+                                <a asp-action="Details" asp-route-id="@item.OrderId">Details</a>
+                            </td>
+                        </tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

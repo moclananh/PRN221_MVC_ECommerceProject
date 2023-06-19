@@ -1,0 +1,86 @@
+﻿@model PRN221_Asm02.Models.Account
+@{
+    ViewData["Title"] = "SignUp";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!-- === Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="/css/SignUp.css">
+
+
+    <!--<title>Login & Registration Form</title>-->
+</head>
+<body>
+    <div class="container">
+        <div class="forms">
+            <div class="form signup">
+                <span class="title">Registration</span>
+
+                <form asp-action="Create" method="post" onsubmit="return checkAllData()">
+                    <div class="input-field">
+                        <input asp-for="UserName" placeholder="Enter your name" id="txtUsername" onblur="checkUsername()" required />
+                        <i class="uil uil-user"></i>
+                    </div>
+                    <div id="txtUsernameMessage" style="color: red"></div>
+                    
+                        <span style="color: red">@ViewBag.Message1</span>
+                    
+
+                    <input asp-for="Type" class="form-control" value="true" type="hidden" />
+                    <input asp-for="FullName" class="form-control" value="User Name" type="hidden" />
+                    <div class="input-field">
+                        <input asp-for="Password" type="password" id="txtPassword1" class="password" placeholder="Enter a password" onblur="checkPassword1()" required />
+                        <i class="uil uil-lock icon"></i>
+                   
+                    </div>
+
+                    <div id="txtPassword1Message" style="color: red">
+
+                    </div>
+
+                    <div class="input-field">
+                        <input type="password" class="password" id="txtPassword2" placeholder="Confirm a password" onblur="checkPassword2()" required>
+                        <i class="uil uil-lock icon"></i>
+                        <i class="uil uil-eye-slash showHidePw"></i> 
+                   
+                    </div>
+                    <div id="txtPassword2Message" style="color: red">
+
+                    </div>
+                    <div class="checkbox-text">
+                        <div class="checkbox-content">
+                            <input type="checkbox" id="termCon">
+                            <label for="termCon" class="text">I accepted all terms and conditions</label>
+                        </div>
+                    </div>
+
+                    <div class="input-field button">
+                        <input type="submit" value="Signup">
+                    </div>
+                </form>
+
+                <div class="login-signup">
+                    <span class="text">
+                        Already a member?
+                        <a asp-controller="Accounts" asp-action="Index" class="text login-link">Login Now</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/Login.js"></script>
+</body>
+</html>
+
+
